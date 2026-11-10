@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11:11 — Miss Hooria Kayani</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+ margin: 0;
+ min-height: 100vh;
+ font-family: "Helvetica Neue",Arial,sans-serif;
+ font-weight: 300;
+ color: #f8efff;
+ background: radial-gradient(ellipse at 50% 20%,#43245f,#211438 48%,#10091e);
+ overflow-x: hidden;
+}
+
+#stars,#hearts {
+ position: fixed;
+ inset: 0;
+ pointer-events: none;
+ overflow: hidden;
+}
+
+.star {
+ position: absolute;
+ border-radius: 50%;
+ background: white;
+ animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+ to { opacity: .22; transform: scale(.65); }
+}
+
+main {
+ position: relative;
+ z-index: 2;
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ text-align: center;
+ padding: 30px 20px 25px;
+}
+
+.kicker {
+ font-size: clamp(10px,2.5vw,13px);
+ letter-spacing: .27em;
+ color: #c9b7e2;
+ margin: 0 0 90px;
+}
+
+.time {
+ font-size: clamp(70px,13vw,90px);
+ font-weight: 200;
+ letter-spacing: .08em;
+ color: #fff1ff;
+ text-shadow: 0 0 25px #e4c2ff88;
+ line-height: 1;
+}
+
+.label {
+ margin: 25px 0 18px;
+ font-size: clamp(11px,2.7vw,16px);
+ letter-spacing: .15em;
+ color: #d8c8e8;
+}
+
+h1 {
+ font-size: clamp(28px,5vw,42px);
+ font-weight: 300;
+ color: #f0d6fa;
+ margin: 0 0 12px;
+}
+
+p {
+ max-width: 640px;
+ font-size: clamp(16px,3vw,21px);
+ line-height: 1.7;
+ color: #e7dff0;
+ margin: 0 auto;
+}
+
+.music,.next {
+ margin-top: 20px;
+ border: 1px solid #e5c8ff66;
+ border-radius: 999px;
+ background: #ffffff0d;
+ color: #f8eaff;
+ padding: 12px 20px;
+ font-size: 11px;
+ letter-spacing: .12em;
+ cursor: pointer;
+ text-decoration: none;
+ transition: .25s;
+ font-family: inherit;
+}
+
+.music:hover,.next:hover {
+ background: #ffffff20;
+ transform: translateY(-2px);
+}
+
+.next {
+ display: inline-block;
+ margin-top: 15px;
+ background: #71469a66;
+}
+
+.heart {
+ position: absolute;
+ bottom: -25px;
+ color: #f5b5e5;
+ text-shadow: 0 0 12px #ff9cdb;
+ animation: float linear forwards;
+}
+
+@keyframes float {
+ to {
+  transform: translateY(-110vh) translateX(30px);
+  opacity: 0;
+ }
+}
+
+@media(max-height:700px) {
+ .kicker { margin-bottom: 55px; }
+ .time { font-size: 70px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+<div id="hearts"></div>
+
+<main>
+
+ <div class="kicker">
+ A LITTLE UNIVERSE, MADE WITH LOVE
+ </div>
+
+ <div class="time">11:11</div>
+
+ <div class="label">
+ A LITTLE WISHING UNIVERSE FOR
+ </div>
+
+ <h1>Miss Hooria Kayani</h1>
+
+ <p>
+ Hey its 11:11 and i want you to know that youre my biggest wish rn. I hope your wish will be completed that you said you will tell me 👿 😭 May the things your heart quietly prays for find their way to you "saat samundar paar aayega,jo tera hai tere pas har bar ayega " youll get all happiness you deserve. May god keep us together forever and also wanna tell you that youre thanks for being             my FOREVER WALI WISHHHHHHH 😋
+ </p>
+
+ <button class="music" id="musicButton">
+ ♫ PLAY MUSIC
+ </button>
+
+ <a class="next" href="./fireworks.html">
+ FIREWORKS ✦
+ </a>
+
+</main>
+
+<audio id="mySong" src="./music.mp3" loop></audio>
+
+<script>
+// STARS
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 115; i++) {
+ let s = document.createElement("i");
+
+ s.className = "star";
+ s.style.left = Math.random() * 100 + "%";
+ s.style.top = Math.random() * 100 + "%";
+
+ let z = Math.random() * 2 + 1;
+ s.style.width = z + "px";
+ s.style.height = z + "px";
+ s.style.animationDelay = Math.random() * 4 + "s";
+
+ stars.appendChild(s);
+}
+
+// FLOATING HEARTS
+function heart() {
+ let h = document.createElement("span");
+
+ h.className = "heart";
+ h.textContent = Math.random() > .5 ? "♡" : "✧";
+
+ h.style.left = Math.random() * 100 + "%";
+ h.style.fontSize = (12 + Math.random() * 12) + "px";
+ h.style.animationDuration = (8 + Math.random() * 7) + "s";
+
+ document.getElementById("hearts").appendChild(h);
+
+ setTimeout(() => h.remove(), 16000);
+}
+
+setInterval(heart, 1000);
+
+// PAGE 2 MUSIC
+const song = document.getElementById("mySong");
+const musicButton = document.getElementById("musicButton");
+
+song.volume = 0.6;
+
+musicButton.addEventListener("click", async () => {
+    if (song.paused) {
+        try {
+            await song.play();
+            musicButton.textContent = "♫ PAUSE MUSIC";
+        } catch (error) {
+            musicButton.textContent = "♫ TAP TO PLAY";
+        }
+    } else {
+        song.pause();
+        musicButton.textContent = "♫ PLAY MUSIC";
+    }
+});
+
+</script>
+
+</body>
+</html>

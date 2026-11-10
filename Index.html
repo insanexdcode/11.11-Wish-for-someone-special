@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Little Question ♡</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;display:grid;place-items:center;
+ font-family:"Helvetica Neue",Arial,sans-serif;font-weight:300;
+ color:#f8efff;
+ background:radial-gradient(ellipse at 50% 42%,#4a286b,#24153f 48%,#100a20);
+ overflow:hidden
+}
+#stars{position:fixed;inset:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:white;animation:twinkle 3s infinite alternate}
+@keyframes twinkle{to{opacity:.2;transform:scale(.6)}}
+.card{
+ position:relative;width:min(480px,calc(100% - 36px));
+ padding:45px 28px;text-align:center;
+ border:1px solid #e9d4ff44;border-radius:28px;
+ background:#ffffff0e;backdrop-filter:blur(12px);
+ box-shadow:0 20px 70px #05020d88
+}
+.small{font-size:10px;letter-spacing:.28em;color:#c9b5e2;text-transform:uppercase}
+h1{font-size:clamp(30px,7vw,43px);font-weight:300;line-height:1.4;margin:24px 0 30px}
+button,.enter{
+ border:1px solid #d9b4ff88;border-radius:999px;
+ background:#70499a66;color:white;padding:13px 23px;
+ letter-spacing:.12em;font-size:11px;cursor:pointer;text-decoration:none;
+ display:inline-block
+}
+button:hover,.enter:hover{background:#8b61b766}
+#lock{display:none;margin-top:25px}
+input{
+ display:block;width:100%;margin:0 auto 13px;padding:13px 16px;
+ border-radius:14px;border:1px solid #e8d3ff55;
+ background:#100a20aa;color:white;text-align:center;font-size:15px
+}
+input::placeholder{color:#b9a8cc}
+#feedback{min-height:26px;margin:14px 0;color:#ffb4c8;font-size:14px}
+#continue{display:none;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<section class="card">
+ <div class="small">Ittu sa gift for you</div>
+ <h1>Haan haan hojao khush, Click mai krunga niche ? 👿</h1>
+
+ <button id="open">CLICK HERE ♡</button>
+
+ <div id="lock">
+  <input id="password" type="password" placeholder="A little password...">
+  <button id="check">ENTER</button>
+  <p id="feedback"></p>
+  <a class="enter" id="continue" href="./wish.html">Click it ✦</a>
+ </div>
+</section>
+
+<script>
+const stars=document.getElementById("stars");
+
+for(let i=0;i<100;i++){
+ const s=document.createElement("i");
+ s.className="star";
+ s.style.left=Math.random()*100+"%";
+ s.style.top=Math.random()*100+"%";
+ s.style.animationDelay=Math.random()*3+"s";
+ stars.appendChild(s);
+}
+
+document.getElementById("open").onclick=()=>{
+ document.getElementById("lock").style.display="block";
+ document.getElementById("password").focus();
+};
+
+function unlock(){
+ const correctPassword="1710";
+ const entered=document.getElementById("password").value;
+ const feedback=document.getElementById("feedback");
+ const next=document.getElementById("continue");
+
+ if(entered===correctPassword){
+  feedback.textContent="oh u are smart✨";
+  feedback.style.color="#d8ffc9";
+  next.style.display="inline-block";
+ }else{
+  feedback.textContent="incorrect baby 😠";
+  feedback.style.color="#ffb4c8";
+  next.style.display="none";
+ }
+}
+
+document.getElementById("check").onclick=unlock;
+document.getElementById("password").addEventListener("keydown",e=>{
+ if(e.key==="Enter")unlock();
+});
+</script>
+</body>
+</html>
+
